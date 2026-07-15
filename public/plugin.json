@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/@ztools-center/ztools-api-types/resource/ztools.schema.json",
   "name": "dir-break",
-  "title": "目录解散",
+  "title": "解散文件夹",
   "description": "将文件夹内的所有文件释放到上一层目录，一键解散空文件夹",
   "author": "",
   "version": "1.2.0",

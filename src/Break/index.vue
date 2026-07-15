@@ -234,19 +234,14 @@ onMounted(() => {
 <template>
   <div class="break-container">
     <div class="break-header">
-      <span class="break-title">目录解散</span>
+      <span class="break-title">解散文件夹</span>
     </div>
 
-    <div
-      v-if="!targetDir && !breakResult"
-      class="drop-zone"
-      :class="{ 'drop-zone--active': isDragOver }"
-      @dragover="handleDragOver"
-      @dragleave="handleDragLeave"
-      @drop="handleDrop"
-    >
+    <div v-if="!targetDir && !breakResult" class="drop-zone" :class="{ 'drop-zone--active': isDragOver }"
+      @dragover="handleDragOver" @dragleave="handleDragLeave" @drop="handleDrop">
       <div class="drop-zone-icon">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
           <polyline points="17 8 12 3 7 8" />
           <line x1="12" y1="3" x2="12" y2="15" />
@@ -281,16 +276,10 @@ onMounted(() => {
       <div class="option-group">
         <span class="option-label">模式</span>
         <div class="toggle-group">
-          <button
-            class="toggle-btn"
-            :class="{ 'toggle-btn--active': !recursive }"
-            @click="setRecursive(false)"
-          >单层</button>
-          <button
-            class="toggle-btn"
-            :class="{ 'toggle-btn--active': recursive }"
-            @click="setRecursive(true)"
-          >递归</button>
+          <button class="toggle-btn" :class="{ 'toggle-btn--active': !recursive }"
+            @click="setRecursive(false)">单层</button>
+          <button class="toggle-btn" :class="{ 'toggle-btn--active': recursive }"
+            @click="setRecursive(true)">递归</button>
         </div>
       </div>
       <div class="option-group">
@@ -314,17 +303,15 @@ onMounted(() => {
           <span class="summary-stat-label">文件夹</span>
         </div>
         <div class="summary-stat">
-          <span class="summary-stat-value">{{ scanResult.totalFiles > 0 ? formatSize(scanResult.totalSize) : '--' }}</span>
+          <span class="summary-stat-value">{{ scanResult.totalFiles > 0 ? formatSize(scanResult.totalSize) : '--'
+            }}</span>
           <span class="summary-stat-label">{{ scanResult.totalFiles > 0 ? '总计' : '仅子目录' }}</span>
         </div>
       </div>
 
       <div v-if="scanResult.totalFiles > 0 && scanResult.fileTypes.length > 0" class="preview-types">
-        <span
-          v-for="(t, i) in scanResult.fileTypes.slice(0, 6)"
-          :key="i"
-          class="type-badge"
-        >{{ t.ext || '(无扩展名)' }} {{ t.count }}</span>
+        <span v-for="(t, i) in scanResult.fileTypes.slice(0, 6)" :key="i" class="type-badge">{{ t.ext || '(无扩展名)' }} {{
+          t.count }}</span>
         <span v-if="scanResult.fileTypes.length > 6" class="type-badge type-badge--more">
           +{{ scanResult.fileTypes.length - 6 }}
         </span>
@@ -336,7 +323,8 @@ onMounted(() => {
           <div class="compare-desc">{{ scanResult.totalFiles }} 个文件分布在 {{ scanResult.totalDirs || 1 }} 个目录中</div>
         </div>
         <div class="compare-arrow">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12" />
             <polyline points="12 5 19 12 12 19" />
           </svg>
@@ -360,12 +348,8 @@ onMounted(() => {
           <span class="preview-section-count">{{ scanResult.totalFiles }}</span>
         </div>
         <div class="preview-list">
-          <div
-            v-for="(f, i) in previewFiles.items"
-            :key="i"
-            class="preview-row"
-            :class="{ 'preview-row--nested': f.relativePath.indexOf('/') > -1 }"
-          >
+          <div v-for="(f, i) in previewFiles.items" :key="i" class="preview-row"
+            :class="{ 'preview-row--nested': f.relativePath.indexOf('/') > -1 }">
             <span class="preview-row-icon">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
@@ -389,11 +373,7 @@ onMounted(() => {
           <span class="preview-section-count">{{ scanResult.totalDirs }}</span>
         </div>
         <div class="preview-list">
-          <div
-            v-for="(d, i) in previewDirs.items"
-            :key="i"
-            class="preview-row"
-          >
+          <div v-for="(d, i) in previewDirs.items" :key="i" class="preview-row">
             <span class="preview-row-icon preview-row-icon--dir">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
@@ -419,11 +399,8 @@ onMounted(() => {
     </div>
 
     <div v-if="targetDir && scanResult && !breakResult && !isLoading" class="action-bar">
-      <button
-        class="btn btn-primary btn-action"
-        :disabled="isBreaking || (scanResult.totalFiles === 0 && scanResult.totalDirs === 0)"
-        @click="handleBreak"
-      >
+      <button class="btn btn-primary btn-action"
+        :disabled="isBreaking || (scanResult.totalFiles === 0 && scanResult.totalDirs === 0)" @click="handleBreak">
         <span v-if="isBreaking" class="loading-spinner loading-spinner--small"></span>
         <span>{{ isBreaking ? '解散中...' : '解散文件夹' }}</span>
       </button>
@@ -435,11 +412,7 @@ onMounted(() => {
         <button class="btn btn-ghost btn-small" @click="handleClearHistory">清空</button>
       </div>
       <div class="history-list">
-        <div
-          v-for="record in history"
-          :key="record.id"
-          class="history-item"
-        >
+        <div v-for="record in history" :key="record.id" class="history-item">
           <div class="history-item-info">
             <div class="history-item-name">{{ record.targetName }}</div>
             <div class="history-item-meta">
@@ -562,7 +535,9 @@ onMounted(() => {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .message {
@@ -666,7 +641,7 @@ onMounted(() => {
   text-align: center;
 }
 
-.summary-stat + .summary-stat {
+.summary-stat+.summary-stat {
   border-left: 1px solid var(--border);
 }
 
