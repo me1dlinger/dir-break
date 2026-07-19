@@ -83,3 +83,9 @@ npm install
 npm run dev    # 开发模式 http://localhost:5173
 npm run build  # 构建到 dist/
 ```
+
+## 开源协议
+
+[GPL V3](./LICENSE)
+
+***
